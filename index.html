@@ -15,6 +15,7 @@
       justify-content: start;
       min-height: 100vh;
       overflow-x: hidden;
+      position: relative; /* для сердечек */
     }
 
     h1 {
@@ -44,6 +45,7 @@
       margin: 20px 0;
       position: relative;
       width: 100%;
+      z-index: 1; /* поверх сердечек */
     }
 
     .video-frame {
@@ -65,11 +67,11 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      margin: 0 30px; /* увеличили отступ */
+      margin: 0 30px;
     }
 
     .side-photos img {
-      width: 200px;  /* увеличили размер фоток */
+      width: 200px;
       border-radius: 15px;
       transform: rotate(-5deg);
       box-shadow: 2px 4px 12px rgba(0,0,0,0.2);
@@ -85,6 +87,32 @@
       font-size: 1.3em;
       color: #7a1fa2;
       text-align: center;
+      z-index: 1;
+    }
+
+    /* ===== Летающие сердечки по краям ===== */
+    .floating-hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .floating-hearts span {
+      position: absolute;
+      bottom: -50px;
+      font-size: 2em;
+      animation: rise 8s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
     }
   </style>
 </head>
@@ -102,9 +130,7 @@
 
     <!-- Видео -->
     <div class="video-frame">
-      <!--<iframe src="https://drive.google.com/file/d/1Vwo3ALNKi456ljBmSRe5DrfbzMWhnoxX/preview"
-              allow="autoplay" allowfullscreen></iframe> -->
-      <iframe width="560" height="315" 
+      <iframe 
         src="https://www.youtube.com/embed/JXKxTKdtMGI?si=WxaTRGROeudyyFDI" 
         frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -121,6 +147,18 @@
   </div>
 
   <footer> 💘 Навсегда твой. Егор 💘</footer>
+
+  <!-- Летающие сердечки по краям -->
+  <div class="floating-hearts">
+    <!-- Левый край -->
+    <span style="left:5%; animation-delay:0s;">💖</span>
+    <span style="left:8%; animation-delay:3s;">💕</span>
+    <span style="left:12%; animation-delay:6s;">💘</span>
+
+    <!-- Правый край -->
+    <span style="right:5%; animation-delay:1s;">💜</span>
+    <span style="right:8%; animation-delay:4s;">💞</span>
+    <span style="right:12%; animation-delay:7s;">💝</span>
+  </div>
 </body>
 </html>
-
